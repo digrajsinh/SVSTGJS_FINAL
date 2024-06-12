@@ -1,0 +1,174 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% comment %} <link rel="stylesheet" href="{% static 'root/form.css' %}" /> {% endcomment %}
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'component/css/style.css' %}" rel="stylesheet">
+  </head>
+  <body>
+    <section class="h-100">
+      <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12">
+            <div class="card card-registration my-4">
+              <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase">Add Child</h3>
+      <form class="form" method="POST" action="{% url 'personal_details' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <!-- Personal Details Section -->
+        <div class="form-group">
+          <label>Please Attach Passport Photo</label>
+          <input type="file" class="form-control" name="passport_photo" />
+        </div>
+        <div class="form-group">
+          <label>Aadhar Number</label>
+          <!-- <input type="text" class="form-control" name="aadhar_number"/> -->
+          {{form.aadhar_number}}
+        </div>
+
+        <div class="form-group">
+          <label>Email</label>
+          {{form.email}}
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label>Title</label>
+            <select class="form-control" name="title">
+              <option value="None" selected disabled>Please Select Title</option>
+              <option value="Mr.">Mr.</option>
+              <option value="Mrs.">Mrs.</option>
+              <option value="Miss">Miss</option>
+              <option value="Ms.">Ms.</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label>First Name</label>
+            <!-- <input type="text" class="form-control" name="first_name" /> -->
+            {{form.first_name}}
+          </div>
+          <div class="form-group col-md-3">
+            <label>Father's Name</label>
+            <!-- <input type="text" class="form-control" name="father_name" /> -->
+            {{form.father_name}}
+          </div>
+          <div class="form-group col-md-3">
+            <label>Surname</label>
+            {{form.last_name}}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Date Of Birth</label>
+          <!-- <input type="date" class="form-control" name="dob"/> -->
+          {{form.dob}}
+
+        </div>
+
+        <div class="form-group">
+          <label>Present Address</label>
+          <!-- <textarea class="form-control" rows="3" name="present_address"></textarea> -->
+          {{form.present_address}}
+
+        </div>
+
+        <!-- Parents Details Section -->
+        <h4 class="mb-4">Parents Details</h4>
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label>Title</label>
+            <select class="form-control" name="parent_title">
+              <option value="None" selected disabled>Please Select Title</option>
+              <option value="Mr.">Mr.</option>
+              <option value="Mrs.">Mrs.</option>
+              <option value="Miss">Miss</option>
+              <option value="Ms.">Ms.</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label>First Name</label>
+            <!-- <input type="text" class="form-control" name="parent_first_name" /> -->
+          {{form.parent_first_name}}
+
+          </div>
+          <div class="form-group col-md-3">
+            <label>Father's Name</label>
+            <!-- <input type="text" class="form-control" name="parent_father_name" /> -->
+          {{form.parent_father_name}}
+
+          </div>
+          <div class="form-group col-md-3">
+            <label>Surname</label>
+            <!-- <input type="text" class="form-control" name="parent_surname" /> -->
+          {{form.parent_surname}}
+
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Occupation</label>
+          <!-- <input type="text" class="form-control" name="occupation" /> -->
+          {{form.occupation}}
+
+        </div>
+
+        <div class="form-group">
+          <label>Annual Income</label>
+          <!-- <input type="number" class="form-control" name="annual_income" /> -->
+          {{form.annual_income}}
+          
+        </div>
+
+        <div class="form-group">
+          <label>Address</label>
+          <!-- <textarea class="form-control" rows="3" name="parent_address"></textarea> -->
+          {{form.parent_address}}
+
+        </div>
+
+        <div class="form-group">
+          <label>Parent Mobile No.</label>
+          <!-- <input type="number" class="form-control" name="contact_details" /> -->
+          {{form.parent_mobile}}
+
+        </div>
+
+        <div class="form-group">
+          <label>Native Place</label>
+          <!-- <input type="text" class="form-control" name="native_place" /> -->
+          {{form.native_place}}
+
+        </div>
+
+        <!-- Submit button -->
+        <button id="submitButton" type="submit" class="btn btn-danger btn-block mb-4">Submit Personal Details</button>
+      </form>
+    </div>
+    </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          var submitButton = document.getElementById("submitButton");
+          submitButton.addEventListener("click", function(event) {
+              var confirmation = confirm("Are you sure you want to submit your personal details?");
+              if (!confirmation) {
+                  event.preventDefault();
+              }
+          });
+      });
+    </script>
+  </body>
+</html>
+{% endblock %}

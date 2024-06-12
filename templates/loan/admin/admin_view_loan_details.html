@@ -1,0 +1,395 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+    .containers {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    .button-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    
+    .button-group form {
+      margin-right: 10px;
+    }
+    
+    @media only screen and (max-width: 600px) {
+      .button-group {
+        flex-direction: column;
+        align-items: center;
+      }
+    
+      .button-group form {
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+    }
+    </style>
+  </head>
+<body>
+    <section class="h-100">
+      <div class="container py-5">
+        <div class="row d-flex justify-content-center align-items-center">
+          <div class="col-12">
+            <div class="card card-registration my-4">
+              <div class="card-body p-md-5 text-black">
+                  <div class="tbl_content">
+                    <h3 class="mb-5 text-uppercase">Loan Details</h3>
+
+                    <!-- for photo start -->
+                    <div class="container">
+                      <div class="row justify-content-end">
+                        <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                          <div class="card h-100">
+                              <img class="card-img-top" src="{{ reqObj.passport_photo.url }}" alt="passport photo">
+                            <div class="card-body">
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- for photo end -->
+                  </div>
+
+                  <!-- student's details table -->
+                    <table>                      
+                      <tr>
+                        <h3>Student's Personal Details:</h3>
+                      </tr>
+                      <br>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Full Name:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.title}} {{reqObj.get_full_name|title}}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Date Of Birth:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.dob}}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Email Address:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.email}}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Mobile Number:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.mobile}}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Aadhar Card Number:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.aadhar_number}}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Current Address:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.present_address}}</h5>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <br>
+
+                    <!-- parent's details table -->
+                    <table>                      
+                      <tr>
+                        <h3>Parent's Personal Details:</h3>
+                      </tr>
+                      <br>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Full Name:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{reqObj.parent_title}} {{reqObj.parent_first_name|title}} {{reqObj.parent_father_name|title}}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Occupation:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{ reqObj.occupation }}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Annual Income:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{ reqObj.annual_income }}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                      </tr>
+                        <td rowspan="2">
+                          <h5>Permanent Address:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{ reqObj.parent_address }}</h5>
+                        </td>
+                      </tr>
+                        <td rowspan="2">
+                          <h5>Mobile Number:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{ reqObj.parent_mobile }}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Native Place</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{ reqObj.native_place }}</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td rowspan="2">
+                          <h5>Gnati Card Number:</h5>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>  
+                          <h5 style="margin-left: 30px;">{{ reqObj.gnati_no }}</h5>
+                        </td>
+                    </table>
+                    <br>
+                    <!-- academic records table -->
+                    <h3>Student's Academic Details:</h3>
+                    <br>
+                    <div class="table-responsive">
+                      <table class="table">
+                      <tr>
+                        <th><center>Course Completed</center></th>
+                        <th><center>Passing Month/Year</center></th>
+                        <th colspan="3" style="align-content: center;"><center>Marks/Grade</center></th>
+                        <th><center>University/Institute</center></th>
+                      </tr>
+                      <tr>
+                        <td  class="merged-cell"><center>Course Name</center></td>
+                        <td><center>Month/Year</center></td>
+                        <td class="sub-column"><center>Obtained Marks/Grade</center></td>
+                        <td class="sub-column"><center>Total Marks</center></td>
+                        <td><center>Percentage</center></td>
+                        <td><center>Name</center></td>
+                      </tr>
+                      {% for education in edu %}
+                      <tr>
+                        <td><center>{{ education.term_course_passed }}</center></td>
+                        <td><center>{{ education.passing_month_year }}</center></td>
+                        <td><center>{{ education.marks_grade_secured }}</center></td>
+                        <td><center>{{ education.marks_grade_outof }}</center></td>
+                        <td><center>{{ education.marks_grade_per }}</center></td>
+                        <td><center>{{ education.institute_university_name }}</center></td>
+                      </tr> 
+                      {% endfor %}
+                    </table>
+                  
+                    <br>
+
+                    <!-- loan proposal details table -->
+                    <table class="table">                      
+                      <tr>
+                        <h3>Loan Proposal Details:</h3>
+                      </tr>
+                      <br>
+                      <thead>
+                        <tr>
+                          <th><center>Course Name</center></th>
+                          <th><center>Course Duration</center></th>
+                          <th><center>Course Start Date</center></th>
+                          <th><center>Course End Date</center></th>
+                          <th><center>Institute Name</center></th>
+                          <th><center>Institute Address</center></th>
+                          <th><center>Affiliated University</center></th>
+                          <th><center>Application Amount</center></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for loanpor in loan_proposed %}
+                        <tr>
+                          <td><center>{{ loanpor.course }}</center></td>
+                          <td><center>{{ loanpor.duration }}</center></td>
+                          <td><center>{{ loanpor.course_start }}</center></td>
+                          <td><center>{{ loanpor.course_end }}</center></td>
+                          <td><center>{{ loanpor.institute_name }}</center></td>
+                          <td><center>{{ loanpor.institute_address }}</center></td>
+                          <td><center>{{ loanpor.affiliated_university }}</center></td>
+                          <td><center>{{ loanpor.tot_req_loan_amt }}</center></td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Add more rows if needed -->
+                      </tbody>
+                    </table>
+
+                    <br>
+
+                    <!-- loan proposal details table -->
+                    <table class="table">                      
+                      <tr>
+                        <h3>Loan Expense Details:</h3>
+                      </tr>
+                      <br>
+                      <thead>
+                        <tr>
+                          <th><center>Expense Against</center></th>
+                          <th><center>Expense Date</center></th>
+                          <th><center>Amount Payable</center></th>
+                          <th><center>Amount Arranged</center></th>
+                          <th><center>Amount Shortfiall</center></th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for lonaexp in loan_expense %}
+                        <tr>
+                          <td><center>{{ lonaexp.exp_against_head }}</center></td>
+                          <td><center>{{ lonaexp.exp_date }}</center></td>
+                          <td><center>{{ lonaexp.amt_payable }}</center></td>
+                          <td><center>{{ lonaexp.amt_arrenged }}</center></td>
+                          <td><center>{{ lonaexp.amt_shortfall }}</center></td>
+                        </tr>
+                        {% endfor %}
+                        <!-- Add more rows if needed -->
+                      </tbody>
+                    </table>
+                    <table class="table">                      
+                      <tr>
+                        <h3>Arranged Finnace:</h3>
+                      </tr>
+                      <br>
+                      <thead>
+                        <tr>
+                          <th><center>Revenu Head</center></th>
+                          <th><center>Revenue Organization</center></th>
+                          <th><center>Amount Payable</center></th>
+                          <th><center>Amount Arranged</center></th>
+                          <th><center>Amount Shortfiall</center></th>
+
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for argFinn in arranged_finnace %}
+                        <tr>
+                          <td><center>{{ argFinn.revenu_head_details }}</center></td>
+                          <td><center>{{ argFinn.revenue_organization }}</center></td>
+                          <td><center>{{ argFinn.amount_payable }}</center></td>
+                          <td><center>{{ argFinn.amount_arranged }}</center></td>
+                          <td><center>{{ argFinn.amount_shortfiall }}</center></td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                    <br>
+                    {% if loanObj.status == 'REQUESTED' %}
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-12 mb-2">
+                          <form action="{% url 'loan:approve_stu_eduloan' loanObj.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger btn-block">Approve Loan</button>
+                          </form>
+                        </div>
+                        <div class="col-12 mb-2">
+                          <button type="button" class="btn btn-danger btn-block" onclick="displayText('textreturn')">Reject Loan</button>
+                        </div>
+                        <div class="col-12" id="textreturn" style="display: none;">
+                          <form id="reject-loan-form" method="POST" action="{% url 'loan:reject_stu_eduloan' loanObj.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="cancel_loan" value="true">
+                            <div class="form-group">
+                              <label>Reject Reason</label>
+                              <textarea class="form-control" id="cancel_reason" name="rej_reason" rows="3" required></textarea>
+                            </div><br>
+                            <button type="submit" class="btn btn-danger btn-block mb-2">Submit Loan Reject</button>
+                          </form>
+                        </div>
+                        <div class="col-12 mb-2">
+                          <button type="button" class="btn btn-danger btn-block" onclick="displayText('textreject')">Return Loan</button>
+                        </div>
+                        <div class="col-12" id="textreject" style="display: none;">
+                          <form id="return-loan-form" method="POST" action="{% url 'loan:return_stu_eduloan' loanObj.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="cancel_loan" value="true">
+                            <div class="form-group">
+                              <label>Return Reason</label>
+                              <textarea class="form-control" id="cancel_reason" name="return_reason" rows="3" required></textarea>
+                            </div><br>
+                            <button type="submit" class="btn btn-danger btn-block">Submit Loan Return</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}
+                    <script>
+                      function displayText(id) {
+                        var elements = document.querySelectorAll("#textreturn, #textreject");
+                        elements.forEach(function(el) {
+                          if (el.id === id) {
+                            el.style.display = "block";
+                          } else {
+                            el.style.display = "none";
+                          }
+                        });
+                      }
+                    </script>
+                    
+</body>
+</html>
+
+{% endblock %}  

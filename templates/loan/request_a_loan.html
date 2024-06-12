@@ -1,0 +1,69 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <section class="h-100">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12">
+              <div class="card card-registration my-4">
+                <div class="card-body p-md-5 text-black">
+                  <div class="tbl_content">
+                    <h3 class="mb-5 text-uppercase">Request a Loan</h3>
+                    <h4 class="mb-5 text-uppercase">Proposed Committed - Higher Education Study Details</h4>
+                    <div class="container">
+                      </div>
+                      <form class="form" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="student" value="{{ student.id }}" />
+                        <div class="mb-3">
+                          <div class="input-box">
+                            <label>Course Name</label>
+                            <input type="text" name="course" class="form-control" autocomplete="off" required/>
+                          </div>
+                          
+                          <div class="input-box">
+                            <label>Duration (Years)</label>
+                            <input type="number" step="0.1" name="duration" class="form-control" autocomplete="off" required/>
+                          </div>
+    
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="input-box">
+                                <label>Course Start Date</label>
+                                <input type="date" name="course_start" class="form-control" autocomplete="off" required/>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="input-box">
+                                <label>Course End Date</label>
+                                <input type="date" name="course_end" class="form-control" autocomplete="off" required/>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="input-box">
+                            <label>Institute Name</label>
+                            <input type="text" name="institute_name" class="form-control" autocomplete="off" required/>
+                          </div>
+                          <div class="input-box">
+                            <label>Institute Address</label>
+                            <textarea class="form-control" rows="3" name="institute_address" autocomplete="off" required></textarea>
+                          </div>
+                          <div class="input-box">
+                            <label>Affiliated University</label>
+                            <input type="text" name="affiliated_university" class="form-control" autocomplete="off" required/>
+                          </div>
+                          <br>
+                          <!-- Submit button -->
+                          <button id="submitButton" type="submit" class="btn btn-danger btn-block mb-4">Add Proposed Higher Education Details</button>
+                      </form>
+              </div> 
+            </div>
+        </div>
+      </div>
+    </section>
+</body>
+</html>
+{% endblock %}

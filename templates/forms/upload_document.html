@@ -1,0 +1,128 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<section class="h-100">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12">
+                <div class="card card-registration my-4">
+                    <div class="card-body p-md-5 text-black">
+                <h3 class="mb-5 text-uppercase">{% if upd_id %}Update Document{% else %}Add Document{% endif %}</h3>
+                        <form class="form-flex" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="fkey" value="{{ student.id }}" />
+                            <div class="form-row mb-4">
+                                <div class="col-md-6 mb-2">
+                                    <label for="upload_name">File Type</label>
+                                    <select class="form-control" name="upload_name" id="upload_name">
+                                        <option value="None" disabled {% if not form.instance.upload_name %}selected{% endif %}>Select Document Type</option>
+                                        <option value="Student Sign" {% if form.instance.upload_name == "Student Sign" %}selected{% endif %}>Student Sign*</option>
+                                        <option value="Parent Sign" {% if form.instance.upload_name == "Parent Sign" %}selected{% endif %}>Parent Sign*</option>
+                                        <option value="Ration Card" {% if form.instance.upload_name == "Ration Card" %}selected{% endif %}>Ration Card</option>
+                                        <option value="Student Pancard" {% if form.instance.upload_name == "Student Pancard" %}selected{% endif %}>Student Pancard</option>
+                                        <option value="Latest Paid Fee Receipt" {% if form.instance.upload_name == "Latest Paid Fee Receipt" %}selected{% endif %}>Latest Paid Fee Receipt</option>
+                                        <option value="Latest Residence-Rent / Maintenance Receipt" {% if form.instance.upload_name == "Latest Residence-Rent / Maintenance Receipt" %}selected{% endif %}>Latest Residence-Rent / Maintenance Receipt</option>
+                                        <option value="Parent Pancard" {% if form.instance.upload_name == "Parent Pancard" %}selected{% endif %}>Parent Pancard</option>
+                                        <option value="Latest Residence - Electricity / Telephone Bill" {% if form.instance.upload_name == "Latest Residence - Electricity / Telephone Bill" %}selected{% endif %}>Latest Residence - Electricity / Telephone Bill</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="upload_file">File Name</label>
+                                    <input type="file" class="form-control" name="upload_file" id="upload_file" />
+                                    {% if form.instance.upload_file %}
+                                    <div class="mt-2">
+                                        <a href="{{ form.instance.upload_file.url }}" target="_blank">View current file</a>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <button id="submitButton" type="submit" class="btn btn-danger btn-block mb-4">{% if upd_id %}Update Document{% else %}Add Document{% endif %}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container py-5">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12">
+            <div class="card card-registration my-4">
+                <div class="card-body p-md-5 text-black">
+                    <div class="tbl_content">
+                        <h3 class="mb-5 text-uppercase">Uploaded Documents Details</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Sr No.</th>
+                                        <th scope="col">File Name</th>
+                                        <th scope="col">Uploaded Document</th>
+                                        <th scope="col">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for data in uploads %}
+                                    <tr>
+                                        <th scope="row">{{ forloop.counter }}</th>
+                                        <td>{{ data.upload_name }}</td>
+                                        <td>
+                                            {% if data.upload_file %}
+                                            <img src="{{ data.upload_file.url }}" alt="{{ data.upload_name }}" style="max-width: 100px; max-height: 100px;">
+                                            {% else %}
+                                            No file uploaded
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                          <a href="{% url 'edit_upload_document' data.id %}" class="btn btn-danger">Edit</a>
+                                          {% comment %} <form action="{% url 'delete_document' data.id %}" method="POST" style="display:inline;">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                          </form> {% endcomment %}
+
+                                          <button type="button" class="btn btn-danger" onclick="confirmDelete('{{ data.id }}')">Delete</button>
+                                            <form id="deleteForm{{ data.id }}" action="{% url 'delete_document' data.id %}" method="POST" style="display:none;">
+                                                {% csrf_token %}
+                                            </form>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap JS and dependencies -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var submitButton = document.getElementById("submitButton");
+        submitButton.addEventListener("click", function(event) {
+            var confirmation = confirm("Are you sure you want to submit your personal details?");
+            if (!confirmation) {
+                event.preventDefault();
+            }
+        });
+    });
+    function confirmDelete(id) {
+        var confirmation = confirm("Are you sure you want to delete this document detail?");
+        if (confirmation) {
+            document.getElementById("deleteForm" + id).submit();
+        }
+    }
+</script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/js/all.min.js"></script>
+</body>
+</html>
+{% endblock %}

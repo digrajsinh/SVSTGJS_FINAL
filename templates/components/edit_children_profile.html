@@ -1,0 +1,152 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<body>
+    <section class="h-100">
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-12">
+              <div class="card card-registration my-4">
+                <div class="card-body p-md-5 text-black">
+                  <div class="tbl_content">
+                    <h3 class="mb-5 text-uppercase">Children Profile</h3>
+                    <div class="container">
+                        <div class="row justify-content-end">
+                          <div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <img class="card-img-top" src="{{ student.passport_photo.url }}" alt="Passport Photo">
+                              <div class="card-body">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <form class="form" method="POST" action="{% url 'view_student_profile' id=student.id %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Personal Details Section -->
+                        <div class="form-group">
+                          <label>Update Passport Photo</label>
+                          <input type="file" class="form-control" name="passport_photo"  value="{{student.passport_photo}}"/>
+                        </div>
+                        <div class="form-group">
+                          <label>Aadhar Number</label>
+                          {{form.aadhar_number}}
+                        </div>
+                        <div class="form-group">
+                          <label>Email</label>
+                          {{form.email}}
+                        </div>
+                        <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label>Title</label>
+                            {{ form.title }}
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>First Name</label>
+                            {{form.first_name}}
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Father's Name</label>
+                            {{form.father_name}}
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Surname</label>
+                            {{form.last_name}}
+                          </div>
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Date Of Birth</label>
+                          {{form.dob}}
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Present Address</label>
+                          {{form.present_address}}
+                        </div>
+                
+                        <!-- Parents Details Section -->
+                        <h4 class="mb-4">Parents Details</h4>
+                        <div class="form-row">
+                          <div class="form-group col-md-3">
+                            <label>Title</label>
+                            {{form.parent_title}}
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>First Name</label>
+                            {{form.parent_first_name}}
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Father's Name</label>
+                            {{form.parent_father_name}}
+                          </div>
+                          <div class="form-group col-md-3">
+                            <label>Surname</label>
+                            {{form.parent_surname}}
+                          </div>
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Occupation</label>
+                          {{form.occupation}}
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Annual Income</label>
+                          {{form.annual_income}}
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Address</label>
+                          {{form.parent_address}}
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Contact Details</label>
+                          {{form.parent_mobile}}
+                        </div>
+                
+                        <div class="form-group">
+                          <label>Native Place</label>
+                          {{form.native_place}}
+                        </div>
+                
+                        <!-- Submit button -->
+                        <button id="submitButton" type="submit" class="btn btn-danger btn-block mb-4">Update Personal Details</button>
+                      </form>
+      
+  <div class="table-responsive">
+    <table class="table">
+      <thead class="center">
+        <tr>
+          <th>Education Detais</th>
+          <th>Reference Details</th>
+          <th>Upload Documents</th>
+         </tr>
+         </thead>
+         <tbody class="center">
+           <tr>
+           <td>
+             <a href="{% url 'education_details' id=student.id %}" class="btn btn-danger">View</a>
+            </td>
+             <td>
+               <a href="{% url 'reference_details' id=student.id %}" class="btn btn-danger">View</a>
+              </td>
+             <td>
+              <a href="{% url 'upload_document_details' id=student.id %}" class="btn btn-danger">View</a>
+             </td>
+             
+         </tr>
+         </tbody>
+                  </table>
+                </div>
+              </div> 
+            </div>
+        </div>
+      </div>
+    </section>
+</body>
+</html>
+{% endblock %}

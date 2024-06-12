@@ -1,0 +1,84 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'component/css/style.css' %}" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-12">
+          <div class="card card-registration my-4">
+            <div class="card-body p-md-5 text-black">
+              <div class="tbl_content">
+                <h3 class="mb-5 text-uppercase">Cancelled/Rejected Loan Applications</h3>
+                <div class="table-responsive">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Sr No.</th>
+                        <th scope="col">Applied Dt.</th>
+                        <th scope="col">Requested Amount</th>
+                        <th scope="col">Status</th>
+                        {% comment %} <th scope="col">Action</th> {% endcomment %}
+                        
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for loan in loan_list %}
+                      <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ loan.date }}</td>
+                        <td>{{ loan.tot_req_loan_amt }}</td>
+                        <td>{{ loan.status }}</td>
+                        
+                        {% comment %} <td>
+                          <a href="{% url 'loan:edit_loan_details' loan.id %}" class="btn btn-danger">Edit</a>
+                          <form action="{% url 'delete_education' loan.id %}" method="POST" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                        </td> {% endcomment %}
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var submitButton = document.getElementById("submitButton");
+    submitButton.addEventListener("click", function(event) {
+      var confirmation = confirm("Are you sure you want to submit your personal details?");
+      if (confirmation) {
+      } else {
+        event.preventDefault();
+      }
+    });
+  });
+</script>
+</body>
+</html>
+{% endblock %}

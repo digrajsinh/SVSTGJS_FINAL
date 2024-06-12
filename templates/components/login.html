@@ -1,0 +1,29 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<link href="{% static 'component/registration.css' %}" rel="stylesheet">
+<div class="form_wrapper">
+    <div class="form_container">
+      <div class="title_container">
+        <h2>Login</h2>
+        <p>Please enter your login details</p>
+      </div>
+      <div class="row clearfix">
+        <div class="">
+            <form method="POST">
+                {% csrf_token %}
+            <div class="input_field">
+              <input type="email" name="email" placeholder="E-mail" required  autocomplete="off" />
+            </div>
+            <div class="input_field">
+              <input type="password" name="password" placeholder="Password" required  autocomplete="off" />
+            </div>
+            <input class="button" type="submit" value="Login" />
+          </form>
+          <p><a href="{% url 'password_reset' %}">Forgot Password?</a></p>
+          <p> Don't Have Account?<a href="{% url 'register-new' %}">  Register</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}

@@ -1,0 +1,20 @@
+<div class="table-responsive">
+    <table class="table">
+      <thead class="center">
+        <tr>
+          <th>Education Expense Details</th>
+          <th>Arranged Finance Details</th>
+         </tr>
+         </thead>
+         <tbody class="center">
+           <tr>
+           <td>
+             <a href="{% url 'loan:education_expense_details' id=data.id %}" class="btn btn-danger">View</a>
+            </td>
+             <td>
+               <a href="{% url 'loan:arranged_finance_details' id=data.id %}" class="btn btn-danger">View</a>
+              </td>         
+         </tr>
+         </tbody>
+                  </table>
+                </div>

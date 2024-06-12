@@ -1,0 +1,86 @@
+{% extends 'components/base.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% comment %} <link rel="stylesheet" href="{% static 'root/form.css' %}" /> {% endcomment %}
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="{% static 'component/css/style.css' %}" rel="stylesheet">
+    <style>
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      .carousel-item img {
+        filter: blur(5px); /* Adjust the blur intensity as needed */
+      }
+      .carousel-caption {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        text-align: center;
+        padding: 0 15px;
+      }
+      .carousel-caption h1 {
+        font-size: 2.5rem; /* Default heading size */
+        color: white;
+      }
+      .btn-custom {
+        margin-bottom: 10px;
+        font-size: 1rem; /* Default button size */
+      }
+      @media (max-width: 767px) {
+        .carousel-caption h1 {
+          font-size: 1.5rem; /* Smaller heading size for mobile view */
+          padding-bottom: 20px; /* Adjust padding for mobile view */
+        }
+        .btn-custom {
+          font-size: 0.9rem; /* Smaller buttons for mobile view */
+          padding: 0.5rem 1rem; /* Adjust padding for better touch experience */
+        }
+      }
+    </style>
+  </head>
+  <body style="overflow-x:hidden; overflow-y: scroll;">
+    <div id="carouselExampleCaptions" class="carousel slide">  
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{% static 'images/cover_photo.jpeg' %}" class="d-block w-100" alt="...">
+          <div class="carousel-caption">
+            <h1><center><b>શ્રી વિશા શ્રી માડી તપગચ્છ જ્ઞાતિ જૈન સંઘ</b></center></h1>
+            <div class="ml-auto d-flex flex-column flex-md-row justify-content-center">
+              {% if user.is_authenticated %}
+                <a class="btn btn-custom btn-primary" href="{% url 'edit_personal_details' id=user.id %}">Edit Profile</a>
+                <a class="btn btn-custom btn-secondary" href="{% url 'logout' %}">Logout</a>
+              {% else %}
+                <a class="btn btn-custom btn-primary" href="{% url 'login' %}">Login</a>
+                <a class="btn btn-custom btn-secondary" href="{% url 'register-new' %}">Register</a>
+              {% endif %}
+              <a class="btn btn-custom btn-secondary" href="{% static 'Loan_form_Ractified.pdf' %}" download>Download Pdf</a>
+            </div>
+          </div>
+        </div>
+      </div>    
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <img src="{% static 'images/base_photo2.jpeg' %}" class="img-fluid" alt="Image 1">
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <img src="{% static 'images/base_photo1.jpeg' %}" class="img-fluid" alt="Image 2">
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <img src="{% static 'images/base_photo3.jpeg' %}" class="img-fluid" alt="Image 3">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+{% endblock %}
